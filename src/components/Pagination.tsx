@@ -13,6 +13,14 @@ export default function Pagination({ current, pages, link }: Props) {
   const pagination = generatePagination(current, pages);
   return (
     <ul>
+        {
+            current > 1 &&
+            <li>
+                <Link href={link.href(current - 1)} as={link.as(current - 1)}>
+                    <a>prev</a>
+                </Link>
+            </li>
+        }
       {pagination.map((it, i) => (
         <li key={i}>
           {it.excerpt ? (
@@ -24,6 +32,15 @@ export default function Pagination({ current, pages, link }: Props) {
           )}
         </li>
       ))}
+
+      {
+        current < pagination.length &&
+        <li>
+          <Link href={link.href(current + 1)} as={link.as(current + 1)}>
+            <a>next</a>
+          </Link>
+        </li>
+      }
       <style jsx>{`
         ul {
           list-style: none;

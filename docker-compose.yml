@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "10081:8000"
+        volumes:
+            - /app/node_modules
+            - .:/app
+        environment:
+            NODE_ENV: development
+        entrypoint: "tail -f /dev/null"
